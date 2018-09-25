@@ -29,7 +29,7 @@ public class ContandoCasinhas {
 
         System.out.println("Horário inicial execução ["+ contadorNumeros +"]: " + sdf.format(new Date()) + "\n\n");
 
-        while(chavesEncontradas.size() < 10) {
+        while(chavesEncontradas.size() < 5) {
 
             if (totalAntes.compareTo(totalDepois) == 0) {
 
