@@ -27,16 +27,16 @@ public class ContandoCasinhas {
     public void executarAlgoritmoContandoCasinhas() {
 
 
-        System.out.println("Horário inicial execução ["+ contadorNumeros +"]: " + sdf.format(new Date()) + "\n\n");
+        System.out.println("Horário inicial execução: " + sdf.format(new Date()) + "\n\n");
 
-        while(chavesEncontradas.size() < 5) {
+        while(chavesEncontradas.size() < 15) {
 
             if (totalAntes.compareTo(totalDepois) == 0) {
 
                 resultadoArray = contadorTotalDepois.subtract(valor1);
                 chavesEncontradas.add(new BigInteger[]{numCasa, resultadoArray});
 
-                System.out.println("Horário final execução ["+ contadorNumeros +"]: " + sdf.format(new Date()) + "\n");
+                System.out.println("Horário final execução [Chave ordem "+ contadorNumeros +"]: " + sdf.format(new Date()) + "\n");
                 contadorNumeros++;
 
             }
@@ -62,12 +62,14 @@ public class ContandoCasinhas {
 
         }
 
-        print();
+        printChaves();
 
     }
 
-    public void print() {
+    public void printChaves() {
 
+
+        System.out.println("\nChaves encontradas:\n");
         for (int i = 0; i < chavesEncontradas.size(); i++) {
             System.out.println("[" + chavesEncontradas.get(i)[0].toString() + "," + chavesEncontradas.get(i)[1].toString() + "]");
         }
