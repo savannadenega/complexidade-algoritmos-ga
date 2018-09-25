@@ -1,42 +1,64 @@
+import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ContandoCasinhas {
 
-    int totalAntes = 1;
-    int contadorTotalAntes = 2;
+    BigInteger totalAntes = new BigInteger("1");
+    BigInteger contadorTotalAntes = new BigInteger ("2");
 
-    int numCasa = 2;
+    BigInteger numCasa = new BigInteger("2");
 
-    int totalDepois = numCasa + 1;
-    int contadorTotalDepois = totalDepois + 1;
+    BigInteger totalDepois = new BigInteger ("3");
+    BigInteger contadorTotalDepois = new BigInteger ("4");
 
-    List<int[]> chavesEncontradas = new ArrayList<int[]>();
+    List<BigInteger[]> chavesEncontradas = new ArrayList<BigInteger[]>();
 
-    public void execucao(){
+    BigInteger valor1 = new BigInteger ("1");
+    BigInteger valor2 = new BigInteger ("2");
+    BigInteger resultadoArray = new BigInteger ("0");
 
-        //chavesEncontradas.add(new int[]{6,8});
+    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss,SSS");
+    int contadorNumeros = 1;
 
-        while(chavesEncontradas.size() < 2){
+    public void executarAlgoritmoContandoCasinhas() {
 
-                totalAntes = totalAntes + contadorTotalAntes;
-                contadorTotalAntes++;
-                numCasa++;
-                contadorTotalDepois = numCasa + 2;
-                totalDepois = numCasa + 1 + contadorTotalDepois;
 
-                //contadorTotalDepois = totalDepois + 1;
-                while(totalAntes > totalDepois) {
+        System.out.println("Horário inicial execução ["+ contadorNumeros +"]: " + sdf.format(new Date()) + "\n\n");
 
-                    totalDepois = totalDepois + contadorTotalDepois;
-                    contadorTotalDepois = contadorTotalDepois + 1;
+        while(chavesEncontradas.size() < 10) {
 
-                }
+            if (totalAntes.compareTo(totalDepois) == 0) {
 
-                if (totalAntes == totalDepois) {
+                resultadoArray = contadorTotalDepois.subtract(valor1);
+                chavesEncontradas.add(new BigInteger[]{numCasa, resultadoArray});
 
-                    chavesEncontradas.add(new int[]{numCasa, contadorTotalDepois});
-                }
+                System.out.println("Horário final execução ["+ contadorNumeros +"]: " + sdf.format(new Date()) + "\n");
+                contadorNumeros++;
+
+            }
+
+
+            totalAntes = totalAntes.add(contadorTotalAntes);
+            contadorTotalAntes = contadorTotalAntes.add(valor1);
+            numCasa = numCasa.add(valor1);
+
+            contadorTotalDepois = numCasa;
+            contadorTotalDepois = contadorTotalDepois.add(valor2);
+
+            totalDepois = numCasa;
+            totalDepois = totalDepois.add(valor1);
+
+
+            while (totalAntes.compareTo(totalDepois) == 1) {
+
+                totalDepois = totalDepois.add(contadorTotalDepois);
+                contadorTotalDepois = contadorTotalDepois.add(valor1);
+
+            }
 
         }
 
@@ -44,18 +66,18 @@ public class ContandoCasinhas {
 
     }
 
-    public void print(){
+    public void print() {
 
-        for(int i = 0; i < chavesEncontradas.size(); i++) {
-            System.out.println("[" + chavesEncontradas.get(i)[0] + "," + chavesEncontradas.get(i)[1] + "]");
+        for (int i = 0; i < chavesEncontradas.size(); i++) {
+            System.out.println("[" + chavesEncontradas.get(i)[0].toString() + "," + chavesEncontradas.get(i)[1].toString() + "]");
         }
     }
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
         ContandoCasinhas c = new ContandoCasinhas();
 
-        c.execucao();
+        c.executarAlgoritmoContandoCasinhas();
 
     }
 
